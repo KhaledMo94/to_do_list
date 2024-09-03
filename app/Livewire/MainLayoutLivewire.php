@@ -14,6 +14,8 @@ class MainLayoutLivewire extends Component
 
     public $description = '';
 
+    public $selected = 'all';
+
     public function setFilter($filter){
         $this->filter = $filter;
     }
@@ -22,10 +24,13 @@ class MainLayoutLivewire extends Component
     {
         switch ($this->filter) {
             case 'done':
+                $this->selected = 'done';
                 return Task::where('done', true)->get();
             case 'not_completed':
+                $this->selected = 'not_completed';
                 return Task::where('done', false)->get();
             default:
+                $this->selected = 'all';
                 return Task::all();
         }
     }
@@ -44,6 +49,11 @@ class MainLayoutLivewire extends Component
 
         $this->reset(['name','description']);
         session()->flash('success', 'Task has been added successfully!');
+    }
+
+    public function deleteTask($id){
+        Task::where('id',$id)->delete();
+        session()->flash('danger','Task has been deleted');
     }
 
     public function render()
