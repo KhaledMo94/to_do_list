@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,3 +23,7 @@ Route::get('todolist',function(){
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('testing',function(){
+    return DB::table('personal_access_tokens')->get();
+});

@@ -26,7 +26,7 @@ class Task extends Model
 
     protected static function booted()
     {
-        // static::addGlobalScope(UserScope::class);
+        static::addGlobalScope(UserScope::class);
 
         // static::creating(function($task){
         //     $task->user_id= Auth::id();
